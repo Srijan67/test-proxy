@@ -30,7 +30,7 @@ const getLogin = async(obj, url) => {
   }
 }
 app.use(async (req, res, next) => {
- 
+  console.log("testing!")
   if(req.url === "/test" || req.url === "/" || req.url === "https://test-proxy001.onrender.com/test"){
     next()
   }
