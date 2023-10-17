@@ -12,7 +12,7 @@ app.use(express.json());
 const expressJwt = require("express-jwt");
 const { default: axios } = require("axios");
 app.use(cors());
-mongoose.connect("mongodb://127.0.0.1:27017/testMUI").then(() => {
+mongoose.connect("mongodb+srv://srijansinha:Inoticed@cluster0.1wk8wfp.mongodb.net/Test?retryWrites=true").then(() => {
   console.log("connected DB");
 });
 const logStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
