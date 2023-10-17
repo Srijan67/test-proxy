@@ -12,9 +12,6 @@ app.use(express.json());
 const expressJwt = require("express-jwt");
 const { default: axios } = require("axios");
 app.use(cors());
-mongoose.connect("mongodb+srv://srijansinha:Inoticed@cluster0.1wk8wfp.mongodb.net/Test?retryWrites=true").then(() => {
-  console.log("connected DB");
-});
 const logStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
 
 app.use(morgan('combined', { stream: logStream }));
@@ -80,31 +77,7 @@ app.get("/test", (req, res) => {
   console.log('test2')
   res.redirect(req.get('referer')); 
 });
-app.post("/login", async (req, res) => {
-  console.log('login!');
-  let { email, password } = req.body;
-  const data = await usersModel.findOne({ email: email });
 
-  if (data) {
-    if (data.password === password) {
-      var token = jwt.sign({ ...data }, "shhhhh");
-
-      res.status(200).json({ data, token: token, success: true });
-    } else {
-      res.status(400).json({ success: false });
-    }
-  } else {
-    res.status(400).json({ success: false });
-  }
-});
-app.post("/create", async (req, res) => {
-  const data = await usersModel.create(req.body);
-  if (data) {
-    res.status(200).json({ message: "data added!" });
-  } else {
-    res.status(400).json({ message: "User Failed to Add!" });
-  }
-});
 app.listen(PORT, () => {
   console.log("Connected to PORT: ", PORT);
 });
