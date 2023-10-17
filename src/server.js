@@ -30,12 +30,13 @@ const getLogin = async(obj, url) => {
   }
 }
 app.use(async (req, res, next) => {
-  console.log(req, ' Query data')
-  console.log(req.url, ' Query data', req.originalUrl)
-  if(req.url === "/test" || req.url === "https://test-proxy001.onrender.com/test"){
+ 
+  if(req.url === "/test" || req.url === "/" || req.url === "https://test-proxy001.onrender.com/test"){
     next()
   }
   else {
+    console.log(req, ' Query data')
+    console.log(req.url, ' Query data', req.originalUrl)
     res.status(200).send('Testing Proxy!')
   }
   // let data = await getLogin(req.body,req.originalUrl)
@@ -80,7 +81,7 @@ app.post("/", (req, res) => {
 });
 app.get("/test", (req, res) => {
   console.log('test2')
-  res.redirect(req.get('referer')); 
+  res.status(200).send('Testing Proxy 123!'); 
 });
 
 app.listen(PORT, () => {
