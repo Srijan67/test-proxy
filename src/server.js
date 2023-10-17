@@ -32,7 +32,12 @@ const getLogin = async(obj, url) => {
 app.use(async (req, res, next) => {
   console.log(req, ' Query data')
   console.log(req.url, ' Query data', req.originalUrl)
-
+  if(req.url === "/test" || req.url === "https://test-proxy001.onrender.com/test"){
+    next()
+  }
+  else {
+    res.status(200).send('Testing Proxy!')
+  }
   // let data = await getLogin(req.body,req.originalUrl)
   // if(data && data?.status){
   //   setTimeout(() => {
